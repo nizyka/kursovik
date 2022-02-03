@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ip12Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="ID_car" />
+          </Key>
+          <Property Name="ID_car" Type="int" Nullable="false" />
+          <Property Name="Tonnage" Type="float" />
+          <Property Name="Nomber" Type="nchar" MaxLength="10" />
+          <Property Name="ID_dri" Type="nchar" MaxLength="10" />
+          <Property Name="Brand" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Dispetsher">
+          <Key>
+            <PropertyRef Name="ID_dis" />
+          </Key>
+          <Property Name="ID_dis" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Call" Type="varchar" MaxLength="50" />
+          <Property Name="Passvord" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="ID_dri" />
+          </Key>
+          <Property Name="ID_dri" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Call" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="ID_kli" />
+          </Key>
+          <Property Name="ID_kli" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
+          <Property Name="Call" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "18ip12.dbo.Tarif" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Tarif">
+          <Key>
+            <PropertyRef Name="ID_tar" />
+          </Key>
+          <Property Name="ID_tar" Type="int" Nullable="false" />
+          <Property Name="Date_yst" Type="date" />
+          <Property Name="Price_per_km" Type="float" />
+        </EntityType>
+        <EntityType Name="Zakazi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Volume" Type="float" />
+          <Property Name="ID_dis" Type="int" />
+          <Property Name="ID_kli" Type="int" />
+          <Property Name="ID_car" Type="int" />
+          <Property Name="ID_dri" Type="int" />
+          <Property Name="ID_zaya" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Data_prin_zak" Type="date" />
+          <Property Name="Sum" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Zayavka">
+          <Key>
+            <PropertyRef Name="ID_zaya" />
+          </Key>
+          <Property Name="ID_zaya" Type="int" Nullable="false" />
+          <Property Name="Marchryt_t" Type="nvarchar" MaxLength="50" />
+          <Property Name="Marshryt_o" Type="nvarchar" MaxLength="50" />
+          <Property Name="Date_otp" Type="date" />
+          <Property Name="Date_prib" Type="date" />
+          <Property Name="Rasstoyanie" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK_Zakazi_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="ID_car" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Dispetsher">
+          <End Role="Dispetsher" Type="Self.Dispetsher" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispetsher">
+              <PropertyRef Name="ID_dis" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_dis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="ID_dri" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_dri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="ID_kli" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_kli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Zayavka">
+          <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="ID_zaya" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_zaya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ip12ModelContainer">
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Dispetsher" EntityType="Self.Dispetsher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zakazi" EntityType="Self.Zakazi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zayavka" EntityType="Self.Zayavka" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tarif" EntityType="Self.Tarif" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Tarif].[ID_tar] AS [ID_tar], 
+    [Tarif].[Date_yst] AS [Date_yst], 
+    [Tarif].[Price_per_km] AS [Price_per_km]
+    FROM [dbo].[Tarif] AS [Tarif]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Zakazi_Car" Association="Self.FK_Zakazi_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Dispetsher" Association="Self.FK_Zakazi_Dispetsher">
+            <End Role="Dispetsher" EntitySet="Dispetsher" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Driver" Association="Self.FK_Zakazi_Driver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Klient" Association="Self.FK_Zakazi_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Zayavka" Association="Self.FK_Zakazi_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ip12Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="ID_car" />
+          </Key>
+          <Property Name="ID_car" Type="Int32" Nullable="false" />
+          <Property Name="Tonnage" Type="Double" />
+          <Property Name="Nomber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ID_dri" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Car" FromRole="Car" ToRole="Zakazi" />
+        </EntityType>
+        <EntityType Name="Dispetsher">
+          <Key>
+            <PropertyRef Name="ID_dis" />
+          </Key>
+          <Property Name="ID_dis" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Call" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Passvord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Dispetsher" FromRole="Dispetsher" ToRole="Zakazi" />
+        </EntityType>
+        <EntityType Name="Driver">
+          <Key>
+            <PropertyRef Name="ID_dri" />
+          </Key>
+          <Property Name="ID_dri" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Call" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Driver" FromRole="Driver" ToRole="Zakazi" />
+        </EntityType>
+        <EntityType Name="Klient">
+          <Key>
+            <PropertyRef Name="ID_kli" />
+          </Key>
+          <Property Name="ID_kli" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Call" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Klient" FromRole="Klient" ToRole="Zakazi" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Zakazi">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Volume" Type="Double" />
+          <Property Name="ID_dis" Type="Int32" />
+          <Property Name="ID_kli" Type="Int32" />
+          <Property Name="ID_car" Type="Int32" />
+          <Property Name="ID_dri" Type="Int32" />
+          <Property Name="ID_zaya" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Data_prin_zak" Type="DateTime" Precision="0" />
+          <Property Name="Sum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Zakazi_Car" FromRole="Zakazi" ToRole="Car" />
+          <NavigationProperty Name="Dispetsher" Relationship="Self.FK_Zakazi_Dispetsher" FromRole="Zakazi" ToRole="Dispetsher" />
+          <NavigationProperty Name="Driver" Relationship="Self.FK_Zakazi_Driver" FromRole="Zakazi" ToRole="Driver" />
+          <NavigationProperty Name="Klient" Relationship="Self.FK_Zakazi_Klient" FromRole="Zakazi" ToRole="Klient" />
+          <NavigationProperty Name="Zayavka" Relationship="Self.FK_Zakazi_Zayavka" FromRole="Zakazi" ToRole="Zayavka" />
+        </EntityType>
+        <EntityType Name="Zayavka">
+          <Key>
+            <PropertyRef Name="ID_zaya" />
+          </Key>
+          <Property Name="ID_zaya" Type="Int32" Nullable="false" />
+          <Property Name="Marchryt_t" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Marshryt_o" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date_otp" Type="DateTime" Precision="0" />
+          <Property Name="Date_prib" Type="DateTime" Precision="0" />
+          <Property Name="Rasstoyanie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Zayavka" FromRole="Zayavka" ToRole="Zakazi" />
+        </EntityType>
+        <EntityType Name="Tarif">
+          <Key>
+            <PropertyRef Name="ID_tar" />
+          </Key>
+          <Property Name="ID_tar" Type="Int32" Nullable="false" />
+          <Property Name="Date_yst" Type="DateTime" Precision="0" />
+          <Property Name="Price_per_km" Type="Double" />
+        </EntityType>
+        <Association Name="FK_Zakazi_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="ID_car" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_car" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Dispetsher">
+          <End Role="Dispetsher" Type="Self.Dispetsher" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Dispetsher">
+              <PropertyRef Name="ID_dis" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_dis" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Driver">
+          <End Role="Driver" Type="Self.Driver" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Driver">
+              <PropertyRef Name="ID_dri" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_dri" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Klient">
+          <End Role="Klient" Type="Self.Klient" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Klient">
+              <PropertyRef Name="ID_kli" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_kli" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zakazi_Zayavka">
+          <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zayavka">
+              <PropertyRef Name="ID_zaya" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="ID_zaya" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Car" EntityType="Self.Car" />
+          <EntitySet Name="Dispetsher" EntityType="Self.Dispetsher" />
+          <EntitySet Name="Driver" EntityType="Self.Driver" />
+          <EntitySet Name="Klient" EntityType="Self.Klient" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Zakazi" EntityType="Self.Zakazi" />
+          <EntitySet Name="Zayavka" EntityType="Self.Zayavka" />
+          <EntitySet Name="Tarif" EntityType="Self.Tarif" />
+          <AssociationSet Name="FK_Zakazi_Car" Association="Self.FK_Zakazi_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Dispetsher" Association="Self.FK_Zakazi_Dispetsher">
+            <End Role="Dispetsher" EntitySet="Dispetsher" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Driver" Association="Self.FK_Zakazi_Driver">
+            <End Role="Driver" EntitySet="Driver" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Klient" Association="Self.FK_Zakazi_Klient">
+            <End Role="Klient" EntitySet="Klient" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Zayavka" Association="Self.FK_Zakazi_Zayavka">
+            <End Role="Zayavka" EntitySet="Zayavka" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ip12ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Car">
+            <EntityTypeMapping TypeName="ip12Model.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="ID_car" ColumnName="ID_car" />
+                <ScalarProperty Name="Tonnage" ColumnName="Tonnage" />
+                <ScalarProperty Name="Nomber" ColumnName="Nomber" />
+                <ScalarProperty Name="ID_dri" ColumnName="ID_dri" />
+                <ScalarProperty Name="Brand" ColumnName="Brand" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Dispetsher">
+            <EntityTypeMapping TypeName="ip12Model.Dispetsher">
+              <MappingFragment StoreEntitySet="Dispetsher">
+                <ScalarProperty Name="ID_dis" ColumnName="ID_dis" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Call" ColumnName="Call" />
+                <ScalarProperty Name="Passvord" ColumnName="Passvord" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Driver">
+            <EntityTypeMapping TypeName="ip12Model.Driver">
+              <MappingFragment StoreEntitySet="Driver">
+                <ScalarProperty Name="ID_dri" ColumnName="ID_dri" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Call" ColumnName="Call" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Klient">
+            <EntityTypeMapping TypeName="ip12Model.Klient">
+              <MappingFragment StoreEntitySet="Klient">
+                <ScalarProperty Name="ID_kli" ColumnName="ID_kli" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Call" ColumnName="Call" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ip12Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zakazi">
+            <EntityTypeMapping TypeName="ip12Model.Zakazi">
+              <MappingFragment StoreEntitySet="Zakazi">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Volume" ColumnName="Volume" />
+                <ScalarProperty Name="ID_dis" ColumnName="ID_dis" />
+                <ScalarProperty Name="ID_kli" ColumnName="ID_kli" />
+                <ScalarProperty Name="ID_car" ColumnName="ID_car" />
+                <ScalarProperty Name="ID_dri" ColumnName="ID_dri" />
+                <ScalarProperty Name="ID_zaya" ColumnName="ID_zaya" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Data_prin_zak" ColumnName="Data_prin_zak" />
+                <ScalarProperty Name="Sum" ColumnName="Sum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zayavka">
+            <EntityTypeMapping TypeName="ip12Model.Zayavka">
+              <MappingFragment StoreEntitySet="Zayavka">
+                <ScalarProperty Name="ID_zaya" ColumnName="ID_zaya" />
+                <ScalarProperty Name="Marchryt_t" ColumnName="Marchryt_t" />
+                <ScalarProperty Name="Marshryt_o" ColumnName="Marshryt_o" />
+                <ScalarProperty Name="Date_otp" ColumnName="Date_otp" />
+                <ScalarProperty Name="Date_prib" ColumnName="Date_prib" />
+                <ScalarProperty Name="Rasstoyanie" ColumnName="Rasstoyanie" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tarif">
+            <EntityTypeMapping TypeName="ip12Model.Tarif">
+              <MappingFragment StoreEntitySet="Tarif">
+                <ScalarProperty Name="ID_tar" ColumnName="ID_tar" />
+                <ScalarProperty Name="Date_yst" ColumnName="Date_yst" />
+                <ScalarProperty Name="Price_per_km" ColumnName="Price_per_km" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ce7a68547ecb4e59b370eda7a9a30a35" Name="Diagram1">
+        <EntityTypeShape EntityType="ip12Model.Car" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip12Model.Dispetsher" Width="1.5" PointX="0.75" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip12Model.Driver" Width="1.5" PointX="0.75" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip12Model.Klient" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip12Model.sysdiagrams" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip12Model.Zakazi" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip12Model.Zayavka" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="ip12Model.Tarif" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="ip12Model.FK_Zakazi_Car" ManuallyRouted="false" />
+        <AssociationConnector Association="ip12Model.FK_Zakazi_Dispetsher" ManuallyRouted="false" />
+        <AssociationConnector Association="ip12Model.FK_Zakazi_Driver" ManuallyRouted="false" />
+        <AssociationConnector Association="ip12Model.FK_Zakazi_Klient" ManuallyRouted="false" />
+        <AssociationConnector Association="ip12Model.FK_Zakazi_Zayavka" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -25,7 +25,7 @@ namespace курс
         {
             InitializeComponent();
             this.dispetsher = dispetsher;
-            MyDB();
+            listboxView.ItemsSource = Date_base.GetContext().Zakazi.ToList();
 
         }
 

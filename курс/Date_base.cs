@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace курс
 {
-    class Date_base
+   public class Date_base
     {
        private static Entities _context;
         public static Entities GetContext()

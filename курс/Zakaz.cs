@@ -8,19 +8,17 @@ using System.Windows.Data;
 
 namespace курс
 {
-    class Zakaz
-    { }
-
-  /*  {
-        public object Conver(object value, Type targetType, object parameter, CultureInfo culture)
+    class Zakaz : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Zakazi zakazi = value as Zakazi;
-            return zakazi.Data_prin_zak;
-      
+            Zakazi zakaz = value as Zakazi;
+            return zakaz.Data_prin_zak;
         }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            throw new NotFiniteNumberException();
+            throw new NotImplementedException();
         }
-    }*/
+    }
 }

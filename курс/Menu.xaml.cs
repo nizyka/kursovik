@@ -20,9 +20,26 @@ namespace курс
     public partial class Menu : Window
     {
         private Dispetsher dispetsher;
+        ICollection<Zakazi> zakazi;
         public Menu(Dispetsher dispetsher)
         {
             InitializeComponent();
+            this.dispetsher = dispetsher;
+            MyDB();
+
         }
+
+        public void MyDB()
+        {
+            zakazi = Date_base.GetContext().Zakazi.ToList();
+        }
+
+        //private void StackPanel_MouseDown(object sender, MouseButtonEventArgs e)
+        //{
+        //    if (e.ClickCount == 2)
+        //    {
+        //        Zakazi zakazi = (sender as StackPanel).DataContext as Zakazi;
+        //    }
+        //}
     }
 }

@@ -31,7 +31,7 @@ namespace курс
             {
                 if (!String.IsNullOrEmpty(password.Password))
                 {
-                    IQueryable<Dispetsher> dispetsher_list = Entities.GetContext().Dispetsher.Where(p => p.Surname == loginTextBox.Text && p.Passvord == password.Password);
+                    IQueryable<Dispetsher> dispetsher_list = Date_base.GetContext().Dispetsher.Where(p => p.Surname == loginTextBox.Text && p.Passvord == password.Password);
                     if (dispetsher_list.Count() == 1)
                     {
                         MessageBox.Show("Добро пожаловать, " + dispetsher_list.First().Name);

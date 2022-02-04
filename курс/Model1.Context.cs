@@ -17,7 +17,7 @@ namespace курс
     {
 
 
-        private static Entities _context;
+        //private static Entities _context;
         public Entities()
             : base("name=Entities")
         {

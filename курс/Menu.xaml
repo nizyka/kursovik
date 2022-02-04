@@ -7,19 +7,21 @@
         mc:Ignorable="d"
         Title="Menu" Height="450" Width="800">
     <Grid>
-        <ListBox HorizontalAlignment="Left" Height="284" Margin="166,111,0,0" VerticalAlignment="Top" Width="616">
-            <DataTemplate>
-               <StackPanel MouseDown="StackPanel_MouseDown" Height="100" Width="100">
-                  <StackPanel Orientation="Vertical" Width="300">
-                    <TextBlock FontWeight="Bold" Margin="10" FontSize="16">
+        <ListBox HorizontalAlignment="Left" Height="286" Margin="134,109,0,0" VerticalAlignment="Top" Width="648">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel  Height="100" Width="100" Orientation="Horizontal">
+                        <StackPanel Orientation="Vertical" Width="300">
+                            <TextBlock FontWeight="Bold" Margin="10" FontSize="16">
                                
-                                    <Run Text="{Binding Data_prin_zak}"/></TextBlock>
-                    <TextBlock TextWrapping="Wrap" Margin="10">Состав: 
+                       <Run Text="{Binding Zakazi.Data_prin_zak}"/>
                             </TextBlock>
-                </StackPanel>
-                
-              </StackPanel>
-            </DataTemplate>
+
+                        </StackPanel>
+
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
         </ListBox>
 
     </Grid>

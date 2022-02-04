@@ -14,6 +14,7 @@ namespace курс
             if (_context == null) _context = new Entities();
             return _context;
         }
-       public static void ApplyDataBaseChange() => _context?.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+       //обовление базы
+            //public static void ApplyDataBaseChange() => _context?.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
    }
 }

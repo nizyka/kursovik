@@ -25,7 +25,7 @@ namespace курс
         public string Marshryt_o { get; set; }
         public Nullable<System.DateTime> Date_otp { get; set; }
         public Nullable<System.DateTime> Date_prib { get; set; }
-        public string Rasstoyanie { get; set; }
+        public Nullable<int> Rasstoyanie { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zakazi> Zakazi { get; set; }

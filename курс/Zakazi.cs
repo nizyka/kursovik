@@ -21,14 +21,15 @@ namespace курс
         public Nullable<int> ID_car { get; set; }
         public Nullable<int> ID_dri { get; set; }
         public Nullable<int> ID_zaya { get; set; }
-        public string Status { get; set; }
+        public Nullable<int> Status { get; set; }
         public Nullable<System.DateTime> Data_prin_zak { get; set; }
-        public string Sum { get; set; }
+        public Nullable<double> Sum { get; set; }
     
         public virtual Car Car { get; set; }
         public virtual Dispetsher Dispetsher { get; set; }
         public virtual Driver Driver { get; set; }
         public virtual Klient Klient { get; set; }
+        public virtual Statys Statys { get; set; }
         public virtual Zayavka Zayavka { get; set; }
     }
 }

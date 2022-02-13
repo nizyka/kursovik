@@ -8,13 +8,13 @@ namespace курс
 {
    public class Date_base
     {
-       private static Entities _context;
-        public static Entities GetContext()
+       private static Entities1 _context;
+        public static Entities1 GetContext()
         {
-            if (_context == null) _context = new Entities();
+            if (_context == null) _context = new Entities1();
             return _context;
         }
-       //обовление базы
-            //public static void ApplyDataBaseChange() => _context?.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
-   }
+        //обовление базы при добавлении/изменении данных
+        public static void ApplyDataBaseChange() => _context?.ChangeTracker.Entries().ToList().ForEach(p => p.Reload());
+    }
 }

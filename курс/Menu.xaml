@@ -5,23 +5,88 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:курс"
         mc:Ignorable="d"
-        Title="Menu" Height="450" Width="800">
-    <Grid>
-        <ListBox x:Name="listboxView" HorizontalAlignment="Left" Height="286" Margin="134,109,0,0" VerticalAlignment="Top" Width="648">
+        Title="Menu" Height="712.81" Width="1133.161"
+      Style="{StaticResource windowStyle}" WindowStyle="None" AllowsTransparency="True" >
+    <Grid >
+        <ListBox x:Name="listboxView" HorizontalAlignment="Left" Height="523" Margin="234,142,0,0" VerticalAlignment="Top" Width="870">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel  Height="100" Width="100" Orientation="Horizontal">
-                        <StackPanel Orientation="Vertical" Width="300">
-                            <TextBlock 
-                             Text="{Binding Data_prin_zak}" FontWeight="Bold" Margin="10" FontSize="16" />
-                            
+                    <StackPanel MouseDown="StackPanel_MouseDown" Height="100" Width="500" Orientation="Horizontal">
 
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock  Width="80" Text="{Binding Data_prin_zak}" />
                         </StackPanel>
+
+                        <StackPanel Orientation="Vertical"  Width="80">
+                            <TextBlock  TextAlignment="Center">
+                            <TextBlock Text="{Binding Volume}"   />
+                            </TextBlock>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical"  Width="100">
+                            <TextBlock  TextAlignment="Center">
+                            <TextBlock Text="{Binding Statys, Converter={StaticResource statysConvert}}" />
+                            </TextBlock>
+                        </StackPanel>
+
+
+                        <StackPanel Orientation="Vertical"  Width="120">
+                            <TextBlock  Width="80" TextAlignment="Center">
+                            <TextBlock Text="{Binding Sum}"   />
+                            </TextBlock>
+                        </StackPanel>
+
+
 
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
+
+        <Border BorderThickness="1" Background="WhiteSmoke" HorizontalAlignment="Left" Height="78" VerticalAlignment="Top" Width="1133"/>
+
+        <TextBox x:Name="searchTxB"  HorizontalAlignment="Left"
+                     Height="23" Margin="234,98,0,0" TextWrapping="Wrap"
+                     VerticalAlignment="Top" Width="870" 
+                     TextChanged="searchTxB_TextChanged"/>
+
+        <!--<ComboBox x:Name="sortCmB"  HorizontalAlignment="Left"
+                      Margin="32,190,0,0" VerticalAlignment="Top" 
+                      Width="148" Height="23" 
+                      SelectionChanged="sortCmB_SelectionChanged">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}"/>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>-->
+
+        <ComboBox x:Name="filterCmB" HorizontalAlignment="Left"
+                      Margin="32,188,0,0" VerticalAlignment="Top"
+                      Width="148" Height="23" 
+                      DropDownClosed="filterCmB_DropDownClosed">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                        <TextBlock Text="{Binding TitleCat}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+
+        <Label Content="Поиск" HorizontalAlignment="Left" Margin="93,91,0,0" 
+                   VerticalAlignment="Top" Width="115"/>
+        <Label Content="Фильтрация" HorizontalAlignment="Left" Margin="26,150,0,0"
+                   VerticalAlignment="Top"/>
+        <Button x:Name="exitBtn"  Content="Х" HorizontalAlignment="Left" Margin="1060,12,0,0" 
+                    VerticalAlignment="Top" Width="45" Height="34" Click="exitBtn_Click"/>
+        <Button x:Name="addBtn"  Content="Добавить заказ" HorizontalAlignment="Left" 
+                    Margin="4,464,0,0" VerticalAlignment="Top" Width="137" Height="44"
+                    Click="addBtn_Click"/>
+
+        <Label Content="Транспортные грузоперевозки" HorizontalAlignment="Left" Margin="326,16,0,0" VerticalAlignment="Top" Height="62" Width="544" FontSize="36"/>
 
     </Grid>
 </Window>

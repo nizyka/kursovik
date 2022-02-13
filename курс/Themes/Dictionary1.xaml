@@ -1,5 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:local="clr-namespace:курс" >
-    <local:Zakaz x:Key="zakazConvert"/>
+    <local:Status_z x:Key="statysConvert"/>
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#FF8C00"></Setter>
+        <Setter Property="BorderBrush" Value="#0000"></Setter>
+        
+
+    </Style>
+    <Style TargetType="{x:Type Window}" x:Key="windowStyle">
+        <Setter Property="Background" Value="#DCDCDC"></Setter>
+        <Setter Property="FontFamily" Value="Palatino Linotype"></Setter>
+        <Setter Property="FontSize" Value="18"></Setter>
+    </Style>
+
+   
 </ResourceDictionary>

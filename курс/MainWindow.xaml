@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:курс"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="499.621" >
+        Title="MainWindow" Height="450" Width="499.621"
+        Style="{StaticResource windowStyle}"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes">
     <Grid>
         <Label x:Name="zag_autho" FontSize="25" Content="Вход в систему" HorizontalAlignment="Center" Margin="0,88,0,0" VerticalAlignment="Top" FontFamily="Cambria"/>
-        <TextBox x:Name="loginTextBox" HorizontalAlignment="Left" Height="30" Margin="165,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="156" />
+        <TextBox materialDesign:HintAssist.Hint="Введите логин"  x:Name="loginTextBox" HorizontalAlignment="Left" Height="30" Margin="165,155,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="156" />
         <PasswordBox  x:Name="password"  Margin = "165,205,0,0"  VerticalAlignment = " Top "  Height = "30" HorizontalAlignment="Left" Width="156" />
         <Button  x:Name="butto_auth"  Content = " Войти  "  HorizontalAlignment = " Center "  Margin = "182,272,188,0"  VerticalAlignment = " Top "  Width = " 110 "  Height = " 29 "  Click = "Button_auth_Click" FontFamily="Cambria" FontSize="16" />
 

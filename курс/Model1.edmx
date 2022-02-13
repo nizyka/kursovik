@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище ip12Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище ip12Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Car">
           <Key>
             <PropertyRef Name="ID_car" />
@@ -12,7 +12,7 @@
           <Property Name="ID_car" Type="int" Nullable="false" />
           <Property Name="Tonnage" Type="float" />
           <Property Name="Nomber" Type="nchar" MaxLength="10" />
-          <Property Name="ID_dri" Type="nchar" MaxLength="10" />
+          <Property Name="ID_dri" Type="int" />
           <Property Name="Brand" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Dispetsher">
@@ -46,6 +46,13 @@
           <Property Name="Patronymic" Type="nvarchar" MaxLength="50" />
           <Property Name="Call" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Statys">
+          <Key>
+            <PropertyRef Name="ID_st" />
+          </Key>
+          <Property Name="ID_st" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="text_st" Type="nchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -77,9 +84,9 @@
           <Property Name="ID_car" Type="int" />
           <Property Name="ID_dri" Type="int" />
           <Property Name="ID_zaya" Type="int" />
-          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="Status" Type="int" />
           <Property Name="Data_prin_zak" Type="date" />
-          <Property Name="Sum" Type="nchar" MaxLength="10" />
+          <Property Name="Sum" Type="float" />
         </EntityType>
         <EntityType Name="Zayavka">
           <Key>
@@ -90,7 +97,7 @@
           <Property Name="Marshryt_o" Type="nvarchar" MaxLength="50" />
           <Property Name="Date_otp" Type="date" />
           <Property Name="Date_prib" Type="date" />
-          <Property Name="Rasstoyanie" Type="nchar" MaxLength="10" />
+          <Property Name="Rasstoyanie" Type="int" />
         </EntityType>
         <Association Name="FK_Zakazi_Car">
           <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
@@ -140,6 +147,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Zakazi_Statys">
+          <End Role="Statys" Type="Self.Statys" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statys">
+              <PropertyRef Name="ID_st" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Zakazi_Zayavka">
           <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="0..1" />
           <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
@@ -157,6 +176,7 @@
           <EntitySet Name="Dispetsher" EntityType="Self.Dispetsher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Driver" EntityType="Self.Driver" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Klient" EntityType="Self.Klient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Statys" EntityType="Self.Statys" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zakazi" EntityType="Self.Zakazi" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Zayavka" EntityType="Self.Zayavka" Schema="dbo" store:Type="Tables" />
@@ -183,13 +203,16 @@
             <End Role="Klient" EntitySet="Klient" />
             <End Role="Zakazi" EntitySet="Zakazi" />
           </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Statys" Association="Self.FK_Zakazi_Statys">
+            <End Role="Statys" EntitySet="Statys" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
           <AssociationSet Name="FK_Zakazi_Zayavka" Association="Self.FK_Zakazi_Zayavka">
             <End Role="Zayavka" EntitySet="Zayavka" />
             <End Role="Zakazi" EntitySet="Zakazi" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ip12Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -200,7 +223,7 @@
           <Property Name="ID_car" Type="Int32" Nullable="false" />
           <Property Name="Tonnage" Type="Double" />
           <Property Name="Nomber" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="ID_dri" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="ID_dri" Type="Int32" />
           <Property Name="Brand" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Car" FromRole="Car" ToRole="Zakazi" />
         </EntityType>
@@ -238,6 +261,14 @@
           <Property Name="Call" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Klient" FromRole="Klient" ToRole="Zakazi" />
         </EntityType>
+        <EntityType Name="Statys">
+          <Key>
+            <PropertyRef Name="ID_st" />
+          </Key>
+          <Property Name="ID_st" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="text_st" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Statys" FromRole="Statys" ToRole="Zakazi" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -259,13 +290,14 @@
           <Property Name="ID_car" Type="Int32" />
           <Property Name="ID_dri" Type="Int32" />
           <Property Name="ID_zaya" Type="Int32" />
-          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
           <Property Name="Data_prin_zak" Type="DateTime" Precision="0" />
-          <Property Name="Sum" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Sum" Type="Double" />
           <NavigationProperty Name="Car" Relationship="Self.FK_Zakazi_Car" FromRole="Zakazi" ToRole="Car" />
           <NavigationProperty Name="Dispetsher" Relationship="Self.FK_Zakazi_Dispetsher" FromRole="Zakazi" ToRole="Dispetsher" />
           <NavigationProperty Name="Driver" Relationship="Self.FK_Zakazi_Driver" FromRole="Zakazi" ToRole="Driver" />
           <NavigationProperty Name="Klient" Relationship="Self.FK_Zakazi_Klient" FromRole="Zakazi" ToRole="Klient" />
+          <NavigationProperty Name="Statys" Relationship="Self.FK_Zakazi_Statys" FromRole="Zakazi" ToRole="Statys" />
           <NavigationProperty Name="Zayavka" Relationship="Self.FK_Zakazi_Zayavka" FromRole="Zakazi" ToRole="Zayavka" />
         </EntityType>
         <EntityType Name="Zayavka">
@@ -277,7 +309,7 @@
           <Property Name="Marshryt_o" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Date_otp" Type="DateTime" Precision="0" />
           <Property Name="Date_prib" Type="DateTime" Precision="0" />
-          <Property Name="Rasstoyanie" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Rasstoyanie" Type="Int32" />
           <NavigationProperty Name="Zakazi" Relationship="Self.FK_Zakazi_Zayavka" FromRole="Zayavka" ToRole="Zakazi" />
         </EntityType>
         <EntityType Name="Tarif">
@@ -336,6 +368,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Zakazi_Statys">
+          <End Role="Statys" Type="Self.Statys" Multiplicity="0..1" />
+          <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Statys">
+              <PropertyRef Name="ID_st" />
+            </Principal>
+            <Dependent Role="Zakazi">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Zakazi_Zayavka">
           <End Role="Zayavka" Type="Self.Zayavka" Multiplicity="0..1" />
           <End Role="Zakazi" Type="Self.Zakazi" Multiplicity="*" />
@@ -348,11 +392,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Car" EntityType="Self.Car" />
           <EntitySet Name="Dispetsher" EntityType="Self.Dispetsher" />
           <EntitySet Name="Driver" EntityType="Self.Driver" />
           <EntitySet Name="Klient" EntityType="Self.Klient" />
+          <EntitySet Name="Statys" EntityType="Self.Statys" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="Zakazi" EntityType="Self.Zakazi" />
           <EntitySet Name="Zayavka" EntityType="Self.Zayavka" />
@@ -373,6 +418,10 @@
             <End Role="Klient" EntitySet="Klient" />
             <End Role="Zakazi" EntitySet="Zakazi" />
           </AssociationSet>
+          <AssociationSet Name="FK_Zakazi_Statys" Association="Self.FK_Zakazi_Statys">
+            <End Role="Statys" EntitySet="Statys" />
+            <End Role="Zakazi" EntitySet="Zakazi" />
+          </AssociationSet>
           <AssociationSet Name="FK_Zakazi_Zayavka" Association="Self.FK_Zakazi_Zayavka">
             <End Role="Zayavka" EntitySet="Zayavka" />
             <End Role="Zakazi" EntitySet="Zakazi" />
@@ -383,7 +432,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище ip12ModelContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ip12ModelContainer" CdmEntityContainer="Entities1">
           <EntitySetMapping Name="Car">
             <EntityTypeMapping TypeName="ip12Model.Car">
               <MappingFragment StoreEntitySet="Car">
@@ -426,6 +475,14 @@
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
                 <ScalarProperty Name="Call" ColumnName="Call" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Statys">
+            <EntityTypeMapping TypeName="ip12Model.Statys">
+              <MappingFragment StoreEntitySet="Statys">
+                <ScalarProperty Name="ID_st" ColumnName="ID_st" />
+                <ScalarProperty Name="text_st" ColumnName="text_st" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

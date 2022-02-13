@@ -12,19 +12,16 @@ namespace курс
     using System;
     using System.Collections.Generic;
     
-    public partial class Car
+    public partial class Statys
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Car()
+        public Statys()
         {
             this.Zakazi = new HashSet<Zakazi>();
         }
     
-        public int ID_car { get; set; }
-        public Nullable<double> Tonnage { get; set; }
-        public string Nomber { get; set; }
-        public Nullable<int> ID_dri { get; set; }
-        public string Brand { get; set; }
+        public int ID_st { get; set; }
+        public string text_st { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zakazi> Zakazi { get; set; }

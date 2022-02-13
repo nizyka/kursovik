@@ -1,0 +1,30 @@
+﻿<Window x:Class="курс.AddZ"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:курс"
+        mc:Ignorable="d"
+        Title="AddZ" Height="450" Width="800"
+         Style="{StaticResource windowStyle}">
+    <Grid>
+        <TextBlock x:Name="dateTxB" HorizontalAlignment="Left" Margin="127,94,0,0" 
+            TextWrapping="Wrap" Text="Дата принятия заказа:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="volumeTxB" HorizontalAlignment="Left" Margin="127,150,0,0" 
+            TextWrapping="Wrap" Text="Объем заказа" VerticalAlignment="Top"/>
+        <TextBlock x:Name="statysTxB" HorizontalAlignment="Left" Margin="127,200,0,0" 
+            TextWrapping="Wrap" Text="Статус:" VerticalAlignment="Top"/>
+        <TextBlock x:Name="sumTxB" HorizontalAlignment="Left" Margin="127,252,0,0" 
+            TextWrapping="Wrap" Text="Сумма:" VerticalAlignment="Top"/>
+
+        <DatePicker HorizontalAlignment="Left" Margin="304,94,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="volumTB" HorizontalAlignment="Left" Height="23" Margin="300,150,0,0"
+            TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187"/>
+        <TextBox x:Name="sumTB" HorizontalAlignment="Left" Height="23" Margin="300,252,0,0"
+            TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="187"/>
+         <ComboBox x:Name="staCmB" SelectedItem="{Binding Statys}" DisplayMemberPath="TitleCat" 
+                  HorizontalAlignment="Left" Margin="299,200,0,0" VerticalAlignment="Top" Width="188"/>
+        <Button x:Name="AddBut"  Content="Добавить" HorizontalAlignment="Left" Margin="346,327,0,0" VerticalAlignment="Top" Width="94" Height="32" Click="AddBut_Click"/>
+
+    </Grid>
+</Window>

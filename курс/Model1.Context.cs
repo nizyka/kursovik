@@ -13,21 +13,13 @@ namespace курс
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entities : DbContext
+    public partial class Entities1 : DbContext
     {
-
-
-        //private static Entities _context;
-        public Entities()
-            : base("name=Entities")
+        public Entities1()
+            : base("name=Entities1")
         {
         }
-     /*   public static Entities GetContext()
-        {
-            if (_context == null)
-                _context = new Entities();
-            return _context;
-        }*/
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -37,6 +29,7 @@ namespace курс
         public virtual DbSet<Dispetsher> Dispetsher { get; set; }
         public virtual DbSet<Driver> Driver { get; set; }
         public virtual DbSet<Klient> Klient { get; set; }
+        public virtual DbSet<Statys> Statys { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Zakazi> Zakazi { get; set; }
         public virtual DbSet<Zayavka> Zayavka { get; set; }
